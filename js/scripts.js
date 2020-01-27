@@ -22,6 +22,15 @@ function Place(location, landmark, timeOfYear){
 
 
   var placeList = new PlacesList();
+
+  function displayPlacesDetails(placesListToDisplay) {
+    var detailsList = $("ul#places");
+    var htmlForLocationInfo = "";
+    placesListToDisplay.places.forEach(function(place) {
+      htmlForLocationInfo += "<li id=" + place.id + ">" + place.location + " " + place.landmark + " " + place.timeOfYear + "</li>";
+    });
+    detailsList.html(htmlForLocationInfo);
+  }
 $(document).ready(function() {
   $("#user-places").submit(function(event) {
     event.preventDefault();
@@ -29,8 +38,9 @@ $(document).ready(function() {
     var landmark = $("input#landmark").val();
     var timeOfYear = $("input#time-of-year").val();
     var newPlace = new Place(location, landmark, timeOfYear)
-    placeList.addPlace(newPlace)
-    console.log(placeList.places);
+    placeList.addPlace(newPlace);
+    displayPlacesDetails(placeList);
+  
   
     
   })
